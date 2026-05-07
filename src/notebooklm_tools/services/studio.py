@@ -297,6 +297,15 @@ def create_artifact(
     validate_artifact_type(artifact_type)
 
     if artifact_type == "video":
+        # Cinematic format: --style-prompt maps to custom_instructions (same as --focus),
+        # not visual_style_prompt. Remap before validation so the user can use either flag.
+        if video_format == "cinematic" and video_style_prompt.strip():
+            if focus_prompt:
+                focus_prompt = f"{focus_prompt}\n\n{video_style_prompt}"
+            else:
+                focus_prompt = video_style_prompt
+            video_style_prompt = ""
+
         _normalize_video_style(
             video_format=video_format,
             visual_style=visual_style,

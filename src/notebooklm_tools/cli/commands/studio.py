@@ -575,7 +575,7 @@ def create_video(
     style_prompt: str = typer.Option(
         "",
         "--style-prompt",
-        help="Custom visual style description (implies --style custom unless another style is explicitly set)",
+        help="Custom visual style description. For explainer/brief: implies --style custom. For cinematic: mapped to --focus (custom_instructions).",
     ),
     language: str = typer.Option(
         "", "--language", help="BCP-47 language code (default: NOTEBOOKLM_HL or en)"
